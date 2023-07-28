@@ -1,0 +1,64 @@
+package Sumer;
+
+import java.util.Scanner;
+import java.io.File;
+import java.io.FileNotFoundException;
+
+public class WordCount 
+{
+    public static void main(String[] args) 
+    {
+        Scanner scan = new Scanner(System.in);
+
+        // Let the user to enter a text or provide a file
+        System.out.print("Enter a text or provide a file path to count the words and letters: ");
+        String userInput = scan.nextLine();
+        String text = "";
+
+        // Read the input text or file and store it in a string
+        if (userInput.endsWith(".txt")) 
+        {
+            // If path is provided, read the file
+            try 
+            {
+                File file = new File(userInput);
+                Scanner fileReader = new Scanner(file);
+                while (fileReader.hasNextLine()) 
+                {
+                    text += fileReader.nextLine() + " ";
+                }
+
+                fileReader.close();
+            } 
+            catch (FileNotFoundException e) 
+            {
+                System.out.println("Not able to find file");
+                System.exit(1);
+            }
+        } 
+        else 
+        {
+            // Otherwise, use the provided text
+            text = userInput;
+        }
+
+        // Split the string into an array of words using space or punctuation as delimiters
+        String[] words = text.split("[\\s\\p{Punct}]+");
+
+        // Count the number of words
+        int wordCount = words.length;
+
+        // Count the number of letters
+        int letterCount = 0;
+        for (String word : words) {
+            letterCount += word.length();
+        }
+
+        // Display the total count of words and letters to the user
+        System.out.println("Total number of words: " + wordCount);
+        System.out.println("Total number of letters: " + letterCount);
+
+        scan.close();
+    }
+}
+
