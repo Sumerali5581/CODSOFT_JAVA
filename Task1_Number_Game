@@ -1,0 +1,47 @@
+package Sumer;
+
+//Importing packages
+import java.util.Scanner;
+import java.util.Random;
+
+public class NumberGuessingGame 
+{
+    public static void main(String[] args) 
+    {
+        Scanner scan = new Scanner(System.in);
+        Random random = new Random();
+        int lbound = 1;
+        int ubound = 100;
+        int selectedNumber = random.nextInt(ubound - lbound + 1) + lbound;
+        int guess;
+        int attempts = 0;
+
+        System.out.println("               Welcome Number Game");
+        System.out.println("");
+        System.out.println("I have selected a number between " + lbound + " and " + ubound + ".");
+        System.out.println("");
+        System.out.println("Can you guess it?");
+        do 
+        {
+        	System.out.println("");
+            System.out.print("Enter your guess: ");
+            guess = scan.nextInt();
+            attempts++;
+            if (guess < selectedNumber) 
+            {
+                System.out.println("Too low! Try a higher number.");
+            }
+            else if (guess > selectedNumber) 
+            {
+                System.out.println("Too high! Try a lower number.");
+            }
+            else 
+            {
+                System.out.println("Congratulations! You guessed the number correctly!");
+                System.out.println("Number of attempts: " + attempts);
+            }
+        } while (guess != selectedNumber);
+
+        scan.close();
+    }
+}
